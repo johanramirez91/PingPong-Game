@@ -6,10 +6,16 @@ h2 {
   color: aliceblue;
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
   text-align: center;
-  margin-top: 80px;
+  margin-top: 50px;
 }
 
 h3 {
+  color: aquamarine;
+  text-align: center;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+h5 {
   color: aquamarine;
   text-align: center;
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
@@ -26,6 +32,7 @@ h3 {
 }
 
 footer {
+  margin-top: 50px;
   color: aquamarine;
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
   text-align: center;
