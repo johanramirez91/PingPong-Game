@@ -43,6 +43,7 @@ Player.prototype.render = function () {
     this.paddle.render();
 }
 
+//Lógica para el movimiento de la raqueta del jugador según las teclas de flecha
 Player.prototype.update = function () {
     for (let key in keydowns) {
         if (key == "ArrowLeft") {
@@ -63,6 +64,7 @@ Computer.prototype.render = function () {
     this.paddle.render();
 }
 
+//Lógica que sigue la raqueta de la computadora, siempre sigue la posición de la pelota
 Computer.prototype.update = function (ball) {
     var diff = -((this.paddle.x + (this.paddle.width / 2) - ball.x));
     if (diff < 0 && diff < -4) {
@@ -110,6 +112,7 @@ Paddle.prototype.render = function () {
     context.closePath();
 }
 
+//Lógica para el movimiento de las raquetas
 Paddle.prototype.move = function (x, y) {
     this.x += x;
     this.y = y;
@@ -124,6 +127,7 @@ Paddle.prototype.move = function (x, y) {
     }
 }
 
+//Actualización del estado de la pelota, se reinicia al punto central cada vez que se anota un punto.
 Ball.prototype.update = function (playerPaddle, computerPaddle) {
     this.x += this.xSpeed;
     this.y += this.ySpeed;
@@ -146,6 +150,7 @@ Ball.prototype.update = function (playerPaddle, computerPaddle) {
         this.y = HEIGHT / 2;
     }
 
+    //Manejo de colisiones
     if (this.y > WIDTH / 2) {
         if ((this.y - this.radius) < (playerPaddle.y + playerPaddle.height) && (this.y + this.radius) > playerPaddle.y && (this.x - this.radius) < (playerPaddle.x + playerPaddle.width) && (this.x + this.radius) > playerPaddle.x) {
             this.ySpeed = -this.ySpeed;
@@ -161,6 +166,7 @@ Ball.prototype.update = function (playerPaddle, computerPaddle) {
     }
 };
 
+//Escribir puntajes en el canvas
 function drawText(text, x, y) {
     context.fillStyle = "#111";
     context.font = "40px fantasy";
