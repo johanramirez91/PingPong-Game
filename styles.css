@@ -1,5 +1,5 @@
 body {
-  background: rgb(44, 44, 44);
+  background: rgb(32, 32, 32);
 }
 
 h2 {
@@ -9,8 +9,14 @@ h2 {
   margin-top: 80px;
 }
 
+h3 {
+  color: aquamarine;
+  text-align: center;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
 #pingpong {
-  border: 2px solid #fff;
+  border: 6px solid aquamarine;
   position: absolute;
   margin: auto;
   top: 0;
