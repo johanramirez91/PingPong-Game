@@ -19,7 +19,8 @@ document.addEventListener('keyup', function (event) {
 })
 
 let render = function () {
-    player.render(0, 0, WIDTH, HEIGHT);
+    context.clearRect(0, 0, WIDTH, HEIGHT);
+    player.render();
     computer.render();
     ball.render();
 }
@@ -31,15 +32,27 @@ let update = function () {
 }
 
 function Player() {
-    this.paddle = new Paddle(WIDTH / 2, HEIGHT - 20, 60, 20);
+    this.paddle = new Paddle(WIDTH / 2 - 30, HEIGHT - 20, 80, 20);
 }
 
 Player.prototype.render = function () {
     this.paddle.render();
 }
 
+Player.prototype.update = function () {
+    for (let key in keydowns) {
+        if (key == "ArrowLeft") {
+            this.paddle.move(-5, HEIGHT - 15);
+        } else if (key == "ArrowRight") {
+            this.paddle.move(4, HEIGHT - 15);
+        } else {
+            this.paddle.move(0, HEIGHT - 15);
+        }
+    }
+}
+
 function Computer() {
-    this.paddle = new Paddle(WIDTH / 2, 0, 60, 20);
+    this.paddle = new Paddle(WIDTH / 2 - 30, 0, 80, 20);
 }
 
 Computer.prototype.render = function () {
@@ -55,8 +68,11 @@ function Ball(x, y) {
 }
 
 Ball.prototype.render = function () {
+    context.beginPath();
     context.fillStyle = "#111";
+    context.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
     context.fill();
+    context.closePath();
 }
 
 function Paddle(x, y, width, height) {
@@ -69,16 +85,30 @@ function Paddle(x, y, width, height) {
 }
 
 Paddle.prototype.render = function () {
-
+    context.beginPath();
+    context.fillStyle = "#111";
+    context.fillRect(this.x, this.y, this.width, this.height);
+    context.closePath();
 }
 
 Paddle.prototype.move = function () {
-
+    this.x += x;
+    this.y = y;
+    this.xSpeed = x;
+    this.ySpeed = y;
+    if (this.x < 0) {
+        this.x = 0;
+        this.xSpeed = 0;
+    } else if (this.x + this.width > WIDTH) {
+        this.x = WIDTH - this.width;
+        this.xSpeed = 0;
+    }
 }
 
 function drawGame() {
     render();
     update();
+    requestAnimationFrame(drawGame);
 }
 
 drawGame();
